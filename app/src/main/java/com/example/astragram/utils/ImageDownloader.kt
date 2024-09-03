@@ -12,35 +12,30 @@ import java.io.FileOutputStream
 import java.net.URL
 import java.util.concurrent.atomic.AtomicInteger
 
-suspend fun checkAndDownloadImage(context: Context, displayData: DisplayData) {
-    val localPath = downloadImageAsync(context, displayData.url)
+suspend fun initiateImageDownload(context: Context, displayData: DisplayData) {val localPath = downloadImageAsync(context, displayData.url, displayData.title)
 
     if (localPath != null) {
-        // Create and store the FavoriteImage with the unique ID path
         val favoriteImage = FavoriteImage(
-            url = displayData.url,
             localPath = localPath,
             title = displayData.title,
             description = displayData.description
         )
 
-        // Add to local storage or in-memory list
         addFavorite(context, favoriteImage)
         Toast.makeText(context, "Image downloaded successfully", Toast.LENGTH_SHORT).show()
     } else {
-        Toast.makeText(context, "Failed to download image", Toast.LENGTH_SHORT).show()
-    }
+        Toast.makeText(context, "Failed to download image", Toast.LENGTH_SHORT).show()}
 }
+
 private val imageIdCounter = AtomicInteger(1)
 
-suspend fun downloadImageAsync(context: Context, imageUrl: String): String? {
+suspend fun downloadImageAsync(context: Context, imageUrl: String, imageTitle: String): String? {
     return withContext(Dispatchers.IO) {
         try {
-            val uniqueId = imageIdCounter.getAndIncrement() // Generate a unique ID
-            val fileName = "$uniqueId.jpg"
+            val uniqueId = imageIdCounter.getAndIncrement()
+            val fileName = "$uniqueId-${imageTitle.replace(" ", "_")}.jpg"
             val file = File(context.filesDir, fileName)
 
-            // Download the image from the URL
             val inputStream = URL(imageUrl).openStream()
             val outputStream = FileOutputStream(file)
 

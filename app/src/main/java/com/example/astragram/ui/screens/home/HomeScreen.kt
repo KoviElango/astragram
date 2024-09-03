@@ -1,6 +1,5 @@
 package com.example.astragram.ui.screens.home
 
-import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.astragram.data.DisplayData
-import com.example.astragram.utils.checkAndDownloadImage
+import com.example.astragram.utils.initiateImageDownload
 import kotlinx.coroutines.launch
 
 @Composable
@@ -41,7 +40,7 @@ fun HomeScreen(
                     isFavourite = isFavourite,
                     onClick = {
                         coroutineScope.launch {
-                            checkAndDownloadImage(context, displayData)
+                            initiateImageDownload(context, displayData)
                             favoriteStateMap[displayData.url] = true
                         }
                     }
