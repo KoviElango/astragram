@@ -8,6 +8,8 @@ interface NasaApiService {
     @GET("/search")
     fun searchImages(
         @Query("q") query: String,
-        @Query("media_type") mediaType: String = "image"
+        @Query("media_type") mediaType: String = "image",
+        @Query("page") page: Int = 1,
+        @Query("page_size") pageSize: Int = 10
     ): Call<NasaImageResponse>
 }
