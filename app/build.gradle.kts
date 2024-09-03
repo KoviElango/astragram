@@ -74,4 +74,5 @@ dependencies {
     implementation (libs.ui.tooling.preview)
     implementation (libs.androidx.lifecycle.viewmodel.compose)
     implementation (libs.androidx.lifecycle.runtime.compose)
+    implementation("io.coil-kt:coil-compose:2.2.2")
 }
