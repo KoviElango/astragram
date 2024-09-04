@@ -1,32 +1,32 @@
-#Astragram
+# Astragram
 
 Astagram is an Android app which uses NASA's API to fetch and display a collection of images. Users can view, mark favourites, set wallpaper and download their favourites.
 We are aiming for a space themed UI, with some gamified icons and interactions. Images are stunning and taken from the real NASA database. 
 
 Note: The logo and some asserts are designed by @KoviElango(me) using photoshop; I used a free font for non commercial use called Nasalization(Only for the logo).
 
-##Screens:
-###Home Screen:
+## Screens:
+### Home Screen:
 
 Displays a list of images fetched from the NASA API.
 Allows users to scroll through images.
 Images are displayed with titles and descriptions.
 Each image can be tapped to view a larger version.
 
-###Favorites Screen:
+### Favorites Screen:
 
 Displays images marked as favorites by the user.
 Allows users to set image as their wallpaper
 Allows users to remove images from their favorites.
 Images are loaded from local storage.
 
-###Image Viewer(Popup):
+### Image Viewer(Popup):
 
 Displays a full-screen view of the selected image.
 Allows users to share or delete the image.
 This is a open ended feature and can be expanded for future upgrades
 
-##Application Flow
+## Application Flow
 
 - App Launch:
   - Check for required permissions (e.g., reading media).
@@ -45,30 +45,30 @@ This is a open ended feature and can be expanded for future upgrades
   - *In the Image Viewer, provide options to share or delete the image.(*Not in Scope)
   - *Update the UI accordingly after any action (share/delete).(*Not in Scope)
 
-##Architecture: MVVM
+## Architecture: MVVM
 
-##Libraries and Tools:
+## Libraries and Tools:
 - Retrofit for API calls.
 - Coil for image loading.
 - Jetpack Compose for building UI components.
 - Mockito and JUnit for testing.
 
 
-##Requirements and Dependencies
+## Requirements and Dependencies
 
-###SDK Version:
+### SDK Version:
 Min SDK: 30
 Target SDK: 34
 
-###Libraries:
+### Libraries:
 Retrofit, Coil, Mockito, JUnit, Jetpack Compose, AndroidX, etc.
 
-###Permissions:
+### Permissions:
 Internet, Read/Write Storage.
 
-###Font:
+### Font:
 Nasalization (Shout out to  Typodermic Fonts: https://www.dafont.com/nasalization.font?text=ASTRAgram&psize=s)
 
-Please feel free to comment your feedbacks!
+Please feel free to comment, fork, add code, contribute or drop your feedbacks! :)
 
 
