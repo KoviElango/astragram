@@ -14,6 +14,7 @@ import com.example.astragram.data.DisplayData
 import com.example.astragram.ui.screens.ContentDialog
 import com.example.astragram.utils.initiateImageDownload
 import kotlinx.coroutines.launch
+import com.example.astragram.ui.theme.BackgroundWrapper
 
 @Composable
 fun HomeScreen(
@@ -25,36 +26,37 @@ fun HomeScreen(
     val coroutineScope = rememberCoroutineScope()
 
     var selectedImage by remember { mutableStateOf<DisplayData?>(null) }
+    BackgroundWrapper {
+        if (errorMessage != null) {
+            Text(text = errorMessage)
+        } else {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(images) { displayData ->
+                    val isFavourite = favoriteStateMap[displayData.url] ?: false
 
-    if (errorMessage != null) {
-        Text(text = errorMessage)
-    } else {
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            items(images) { displayData ->
-                val isFavourite = favoriteStateMap[displayData.url] ?: false
-
-                ImageCard(
-                    displayData = displayData,
-                    isFavourite = isFavourite,
-                    onFavouriteClick = {
-                        coroutineScope.launch {
-                            initiateImageDownload(context, displayData)
-                            favoriteStateMap[displayData.url] = true
+                    ImageCard(
+                        displayData = displayData,
+                        isFavourite = isFavourite,
+                        onFavouriteClick = {
+                            coroutineScope.launch {
+                                initiateImageDownload(context, displayData)
+                                favoriteStateMap[displayData.url] = true
+                            }
+                        },
+                        onDetailClick = {
+                            selectedImage =
+                                displayData
                         }
-                    },
-                    onDetailClick = {
-                        selectedImage = displayData // Set the selected image to display in the dialog
-                    }
-                )
+                    )
+                }
             }
         }
     }
 
-    // Show dialog if selectedImage is not null
     selectedImage?.let { displayData ->
         ContentDialog(
             displayData = displayData,

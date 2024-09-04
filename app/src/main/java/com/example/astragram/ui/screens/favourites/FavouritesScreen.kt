@@ -1,6 +1,5 @@
 package com.example.astragram.ui.screens.favourites
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,10 +18,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.astragram.data.FavoriteImage
+import com.example.astragram.ui.theme.BackgroundWrapper
 import com.example.astragram.viewmodel.FavoritesViewModel
 import com.example.astragram.viewmodel.additionalFeatures.setWallpaper
 
@@ -38,12 +36,8 @@ fun FavoritesScreen() {
         favoritesViewModel.loadFavorites(context)
     }
 
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = Color.Black
-    ) {
+    BackgroundWrapper {
         if (favoriteImages.isEmpty()) {
-            // Show a punny message when there are no favorite images
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -59,7 +53,6 @@ fun FavoritesScreen() {
                 )
             }
         } else {
-            // Display favorite images in a LazyColumn
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(30.dp),

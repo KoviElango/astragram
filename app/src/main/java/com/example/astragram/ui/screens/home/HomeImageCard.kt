@@ -1,5 +1,6 @@
 package com.example.astragram.ui.screens.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -14,9 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.astragram.data.DisplayData
@@ -30,13 +33,15 @@ fun ImageCard(
     onFavouriteClick: () -> Unit,
     onDetailClick: () -> Unit
 ) {
-    // State to manage the visibility of the dialog
     val showDetail = remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .clip(RoundedCornerShape(16.dp))
+            .background(color = Color.Black.copy(alpha = 0.5f))
+
     ) {
         ImageItem(displayData)
         Row(
@@ -77,7 +82,7 @@ fun ImageDetailButton(
         Icon(
             imageVector = if (showDetail) Icons.Default.Rocket else Icons.Default.Rocket,
             contentDescription = if (showDetail) "Hide Details" else "Show Details",
-            tint = if (showDetail) Color.Blue else Color.Gray,
+            tint = if (showDetail) Color.Blue else Color.White,
             modifier = Modifier.size(32.dp)
         )
     }
@@ -92,7 +97,7 @@ fun ImageItem(displayData: DisplayData) {
     ) {
         AsyncImage(
             model = displayData.url,
-            contentDescription = displayData.title ?: "NASA Image",
+            contentDescription = displayData.title,
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
@@ -101,12 +106,13 @@ fun ImageItem(displayData: DisplayData) {
         )
 
         Text(
-            text = displayData.title ?: "No Title",
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.padding(top = 8.dp)
+            text = displayData.title,
+            style = MaterialTheme.typography.bodyMedium.copy(color = Color.White), fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(top = 8.dp)
         )
 
-        ExpandableText(displayData.description ?: "No Description")
+        ExpandableText(displayData.description)
     }
 }
 
@@ -122,7 +128,7 @@ fun FavouriteButton(
         Icon(
             imageVector = if (isFavourite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
             contentDescription = "Favourite",
-            tint = if (isFavourite) Color.Red else Color.Gray,
+            tint = if (isFavourite) Color.Red else Color.White,
             modifier = Modifier.size(32.dp)
         )
     }
