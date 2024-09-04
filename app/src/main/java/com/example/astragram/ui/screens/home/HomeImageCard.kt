@@ -1,5 +1,9 @@
 package com.example.astragram.ui.screens.home
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,12 +16,15 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -128,15 +135,39 @@ fun FavouriteButton(
     isFavourite: Boolean,
     onClick: () -> Unit
 ) {
+    val scale = remember { Animatable(1f) }
+
+    val tint by animateColorAsState(targetValue = if (isFavourite) Color.Red else Color.White,
+        label = "User Clicked Favourite Button"
+    )
+
+    LaunchedEffect(isFavourite) {
+        scale.animateTo(
+            targetValue = 1.5f,
+            animationSpec = tween(durationMillis = 200, easing = LinearOutSlowInEasing)
+        )
+        scale.animateTo(
+            targetValue = 1f,
+            animationSpec = tween(durationMillis = 200, easing = LinearOutSlowInEasing)
+        )
+    }
+
     IconButton(
-        onClick = onClick,
+        onClick = {
+            onClick()
+        },
         modifier = Modifier.size(48.dp)
     ) {
         Icon(
             imageVector = if (isFavourite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
             contentDescription = "Favourite",
-            tint = if (isFavourite) Color.Red else Color.White,
-            modifier = Modifier.size(32.dp)
+            tint = tint,
+            modifier = Modifier
+                .size(32.dp)
+                .graphicsLayer(
+                    scaleX = scale.value,
+                    scaleY = scale.value
+                )
         )
     }
 }
