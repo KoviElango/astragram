@@ -6,12 +6,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.astragram.data.DisplayData
+import com.example.astragram.ui.screens.ContentDialog
 import com.example.astragram.utils.initiateImageDownload
 import kotlinx.coroutines.launch
 
@@ -23,6 +23,8 @@ fun HomeScreen(
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
+
+    var selectedImage by remember { mutableStateOf<DisplayData?>(null) }
 
     if (errorMessage != null) {
         Text(text = errorMessage)
@@ -38,14 +40,25 @@ fun HomeScreen(
                 ImageCard(
                     displayData = displayData,
                     isFavourite = isFavourite,
-                    onClick = {
+                    onFavouriteClick = {
                         coroutineScope.launch {
                             initiateImageDownload(context, displayData)
                             favoriteStateMap[displayData.url] = true
                         }
+                    },
+                    onDetailClick = {
+                        selectedImage = displayData // Set the selected image to display in the dialog
                     }
                 )
             }
         }
+    }
+
+    // Show dialog if selectedImage is not null
+    selectedImage?.let { displayData ->
+        ContentDialog(
+            displayData = displayData,
+            onDismiss = { selectedImage = null } // Dismiss the dialog when closed
+        )
     }
 }

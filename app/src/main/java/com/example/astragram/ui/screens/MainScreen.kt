@@ -38,7 +38,6 @@ fun MainScreen(mainViewModel: HomeViewModel = viewModel()) {
     val favoriteStateMap = remember { mutableStateMapOf<String, Boolean>() }
 
     var selectedScreen by remember { mutableStateOf("Home") }
-    val context = LocalContext.current
 
     LaunchedEffect(Unit) {
         mainViewModel.fetchImages()
@@ -57,7 +56,7 @@ fun MainScreen(mainViewModel: HomeViewModel = viewModel()) {
         },
         bottomBar = {
             BottomAppBar(
-                modifier = Modifier.height(80.dp),
+                modifier = Modifier.height(60.dp),
                 content = {
                     NavigationBar {
                         NavigationBarItem(
