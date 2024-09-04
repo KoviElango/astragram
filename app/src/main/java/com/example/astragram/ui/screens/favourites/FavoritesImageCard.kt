@@ -21,6 +21,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.astragram.data.FavoriteImage
 
+/*This is basically an individual component of the favorites screen, this can be modified to fit the needs of the app
+Possible suggestions include, a film strip, polaroid photo*/
+
 @Composable
 fun FavoriteImageCard(
     favorite: FavoriteImage,

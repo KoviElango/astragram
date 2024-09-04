@@ -31,6 +31,7 @@ import com.example.astragram.ui.screens.favourites.FavoritesScreen
 import com.example.astragram.ui.screens.home.HomeScreen
 import com.example.astragram.viewmodel.HomeViewModel
 
+//This is the Logo font, can be changed to any font you want but please create a new variable for additional fonts
 val NasalizationFontFamily = FontFamily(
     Font(R.font.nasalization_rg, FontWeight.Normal)
 )
@@ -48,6 +49,8 @@ fun MainScreen(mainViewModel: HomeViewModel = viewModel()) {
         mainViewModel.fetchImages()
     }
 
+
+   //Color for the Scaffold icons
     val color1 = Color(0xFF00FFD9)
     val color2 = Color(0xFF537A75)
 
@@ -86,7 +89,7 @@ fun MainScreen(mainViewModel: HomeViewModel = viewModel()) {
                                     Icons.Default.Public,
                                     contentDescription = "Home",
                                     tint = if (selectedScreen == "Home") color1 else color2,
-                                    modifier = Modifier.size(if (selectedScreen == "Home") 30.dp else 22.dp))
+                                    modifier = Modifier.size(if (selectedScreen == "Home") 30.dp else 20.dp))
                             },
                             selected = selectedScreen == "Home",
                             onClick = { selectedScreen = "Home" },
@@ -100,7 +103,7 @@ fun MainScreen(mainViewModel: HomeViewModel = viewModel()) {
                                     Icons.Default.Favorite,
                                     contentDescription = "Favourites",
                                     tint = if (selectedScreen == "Favourites") color1 else color2,
-                                    modifier = Modifier.size(if (selectedScreen == "Favourites") 30.dp else 22.dp))
+                                    modifier = Modifier.size(if (selectedScreen == "Favourites") 30.dp else 20.dp))
                             },
                             selected = selectedScreen == "Favourites",
                             onClick = { selectedScreen = "Favourites" },
@@ -119,6 +122,13 @@ fun MainScreen(mainViewModel: HomeViewModel = viewModel()) {
                     .fillMaxSize()
                     .background(Color.Black)
             ) {
+
+                /**
+                 * AnimatedContent is used to animate the changes between the screens.
+                 * added a delay of 500ms between the screens so the animation is visible
+                 * Navigator between Home and Favourites
+                 */
+
                 AnimatedContent(
                     targetState = selectedScreen,
                     transitionSpec = {

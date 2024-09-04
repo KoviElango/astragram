@@ -26,6 +26,9 @@ import com.example.astragram.data.DisplayData
 import com.example.astragram.ui.screens.ContentDialog
 import com.example.astragram.ui.screens.ExpandableText
 
+
+//Outline of the image card; Consists of imageItem and the two buttons
+
 @Composable
 fun ImageCard(
     displayData: DisplayData,
@@ -64,29 +67,13 @@ fun ImageCard(
         }
     }
 
+    // Show the content dialog when the button is clicked
     if (showDetail.value) {
         ContentDialog(displayData, onDismiss = { showDetail.value = false })
     }
 }
 
-
-@Composable
-fun ImageDetailButton(
-    showDetail: Boolean,
-    onClick: () -> Unit
-) {
-    IconButton(
-        onClick = onClick,
-        modifier = Modifier.size(48.dp)
-    ) {
-        Icon(
-            imageVector = if (showDetail) Icons.Default.Rocket else Icons.Default.Rocket,
-            contentDescription = if (showDetail) "Hide Details" else "Show Details",
-            tint = if (showDetail) Color.Blue else Color.White,
-            modifier = Modifier.size(32.dp)
-        )
-    }
-}
+//ImageItem is used to paint and format the image with the title and description
 
 @Composable
 fun ImageItem(displayData: DisplayData) {
@@ -113,6 +100,26 @@ fun ImageItem(displayData: DisplayData) {
         )
 
         ExpandableText(displayData.description)
+    }
+}
+
+//Buttons - Both buttons are two seperate composable because they could be gamified if needed
+
+@Composable
+fun ImageDetailButton(
+    showDetail: Boolean,
+    onClick: () -> Unit
+) {
+    IconButton(
+        onClick = onClick,
+        modifier = Modifier.size(48.dp)
+    ) {
+        Icon(
+            imageVector = if (showDetail) Icons.Default.Rocket else Icons.Default.Rocket,
+            contentDescription = if (showDetail) "Hide Details" else "Show Details",
+            tint = if (showDetail) Color.Blue else Color.White,
+            modifier = Modifier.size(32.dp)
+        )
     }
 }
 

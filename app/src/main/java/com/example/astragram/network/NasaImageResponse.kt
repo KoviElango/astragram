@@ -1,5 +1,7 @@
 package com.example.astragram.network
 
+//This is the entire Dataclass structure from the API, for reference
+
 data class NasaImageResponse(
     val collection: CollectionData
 )

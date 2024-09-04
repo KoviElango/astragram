@@ -16,6 +16,8 @@ import com.example.astragram.utils.initiateImageDownload
 import kotlinx.coroutines.launch
 import com.example.astragram.ui.theme.BackgroundWrapper
 
+//Displays a Lazy list of all the 'HomeImageCard's; This is where the Coroutine states are also managed
+
 @Composable
 fun HomeScreen(
     images: List<DisplayData>,
@@ -60,7 +62,7 @@ fun HomeScreen(
     selectedImage?.let { displayData ->
         ContentDialog(
             displayData = displayData,
-            onDismiss = { selectedImage = null } // Dismiss the dialog when closed
+            onDismiss = { selectedImage = null }
         )
     }
 }

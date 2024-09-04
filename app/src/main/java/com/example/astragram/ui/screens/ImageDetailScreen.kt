@@ -16,6 +16,16 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.astragram.data.DisplayData
 
+/**
+ * I only included this to have an idea of what I could do with it; this doesn't have any functionality now but could be used for additional functionality
+ * The ContentDialog composable is a custom dialog that displays detailed information about an item (represented by the DisplayData object).
+ * This dialog shows the item's title, an image, and its description, and includes a close button.
+ *
+ * This is a built-in Jetpack Compose component for creating dialog boxes. It provides a standard way to show dialogs with various configurations.
+ * Improvements:
+ * This can be used to add share images in socialmedia, emails, tweets etc (not implemented yet)
+ */
+
 @Composable
 fun ContentDialog(displayData: DisplayData, onDismiss: () -> Unit) {
     AlertDialog(

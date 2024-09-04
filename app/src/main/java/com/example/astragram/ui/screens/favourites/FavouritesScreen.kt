@@ -25,6 +25,11 @@ import com.example.astragram.ui.theme.BackgroundWrapper
 import com.example.astragram.viewmodel.FavoritesViewModel
 import com.example.astragram.viewmodel.additionalFeatures.setWallpaper
 
+/**
+ * An important detail in this code is the use of the LaunchedEffect composable. it is used to launch a coroutine as load the local images to the favorites screen in the background.
+ * Other than that this would be the same as the HomeScreen.kt file
+ * Added a nice user message to the favorites screen if the favorites list is empty.
+ */
 
 @Composable
 fun FavoritesScreen() {

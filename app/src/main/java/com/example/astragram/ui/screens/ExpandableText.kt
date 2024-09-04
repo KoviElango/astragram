@@ -13,6 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.style.TextOverflow
 
+//This is to change read more or read less button int the description of the image
+
 @Composable
 fun ExpandableText(displayData: String) {
     val isExpanded = remember { mutableStateOf(false) }

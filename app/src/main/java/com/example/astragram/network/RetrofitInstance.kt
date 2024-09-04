@@ -3,6 +3,8 @@ package com.example.astragram.network
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+// Retrofit instance for making API calls
+
 object RetrofitInstance {
     private const val BASE_URL = "https://images-api.nasa.gov/"
 

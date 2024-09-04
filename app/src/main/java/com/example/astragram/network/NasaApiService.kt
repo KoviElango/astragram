@@ -4,6 +4,8 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.Call
 
+// Define the API endpoint and query parameters
+
 interface NasaApiService {
     @GET("/search")
     fun searchImages(

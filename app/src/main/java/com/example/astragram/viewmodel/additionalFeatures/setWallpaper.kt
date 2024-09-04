@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory
 import android.util.Log
 import android.widget.Toast
 
+//it's a fun additional feature; to set your phone's wallpaper; we get the phone's display dimentions form displayMetrics library and use it to crop the image to fit the screen.
+
 fun setWallpaper(context: Context, imagePath: String) {
     val wallpaperManager = WallpaperManager.getInstance(context)
 

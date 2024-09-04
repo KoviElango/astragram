@@ -3,6 +3,8 @@ package com.example.astragram.utils
 import android.content.Context
 import com.example.astragram.data.FavoriteImage
 
+//loads the image from the file and returns a list of favorite images
+
 fun loadFavoriteImagesFromLocal(context: Context): List<FavoriteImage> {
     val filesDir = context.filesDir
     val imageFiles = filesDir.listFiles { file ->
