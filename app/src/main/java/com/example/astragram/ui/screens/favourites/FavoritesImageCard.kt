@@ -1,12 +1,12 @@
 package com.example.astragram.ui.screens.favourites
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.HeartBroken
+import androidx.compose.material.icons.filled.Wallpaper
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -18,33 +18,35 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberAsyncImagePainter
+import coil.compose.AsyncImage
 import com.example.astragram.data.FavoriteImage
 
 @Composable
 fun FavoriteImageCard(
     favorite: FavoriteImage,
-    onRemoveClick: () -> Unit
+    onRemoveClick: () -> Unit,
+    onSetWallpaperClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
-            .border(1.dp, Color.Gray, RoundedCornerShape(12.dp))
             .clip(RoundedCornerShape(12.dp))
             .background(Color.White)
-            .padding(3.dp)
-            .width(160.dp),
+            .fillMaxWidth(),
         verticalArrangement = Arrangement.Top
     ) {
-        Image(
-            painter = rememberAsyncImagePainter(favorite.localPath),
-            contentDescription = favorite.title,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f)
-                .clip(RoundedCornerShape(8.dp))
-                .border(1.dp, Color.Gray, RoundedCornerShape(8.dp)),
-            contentScale = ContentScale.Crop
-        )
+        Row{
+            AsyncImage(
+                model = favorite.localPath,
+                contentDescription = favorite.title,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .aspectRatio(1f)
+                    .clip(RoundedCornerShape(8.dp)),
+                contentScale = ContentScale.Crop
+            )
+
+        }
+
 
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -68,22 +70,17 @@ fun FavoriteImageCard(
                 Icon(
                     imageVector = Icons.Default.HeartBroken,
                     contentDescription = "Remove Favorite",
-                    tint = Color.Red
+                    tint = Color.Black
+                )
+            }
+            IconButton(onClick = onSetWallpaperClick) {
+                Icon(
+                    imageVector = Icons.Default.Wallpaper,
+                    contentDescription = "Set as Wallpaper",
+                    tint = Color.Black
                 )
             }
         }
     }
 }
 
-@Preview
-@Composable
-fun PreviewFavoriteImageCard() {
-    FavoriteImageCard(
-        favorite = FavoriteImage(
-            localPath = "path/to/image.jpg",
-            title = "Image Title",
-            description = "Image Description"
-        ),
-        onRemoveClick = {}
-    )
-}
