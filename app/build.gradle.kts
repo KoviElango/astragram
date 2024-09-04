@@ -47,6 +47,11 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    sourceSets {
+        getByName("test") {
+            java.srcDir("src/test/java")
+        }
+    }
 }
 
 dependencies {
@@ -67,14 +72,29 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    // Retrofit and Gson for networking
     implementation(libs.retrofit)
     implementation (libs.converter.gson)
+
     implementation (libs.ui)
     implementation (libs.material3)
     implementation (libs.ui.tooling.preview)
     implementation (libs.androidx.lifecycle.viewmodel.compose)
     implementation (libs.androidx.lifecycle.runtime.compose)
-    implementation("io.coil-kt:coil-compose:2.2.2")
-    implementation ("androidx.compose.material:material-icons-core:1.5.0")
-    implementation ("androidx.compose.material:material-icons-extended:1.5.0")
+    // Coil for image loading
+    implementation(libs.coil.compose)
+    // Material icons
+    implementation (libs.androidx.material.icons.core)
+    implementation (libs.androidx.material.icons.extended)
+
+    //Unit test dependencies
+    testImplementation (libs.mockito.core)
+    testImplementation (libs.mockito.kotlin)
+    testImplementation (libs.junit)
+    testImplementation (libs.kotlin.test)
+    androidTestImplementation (libs.androidx.core)
+    androidTestImplementation (libs.androidx.junit.v113)
+    androidTestImplementation (libs.androidx.espresso.core.v340)
+    testImplementation (libs.kotlinx.coroutines.test)
+    testImplementation (libs.androidx.core.testing)
 }

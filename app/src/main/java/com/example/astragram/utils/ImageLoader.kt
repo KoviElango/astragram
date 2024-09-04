@@ -6,7 +6,7 @@ import com.example.astragram.data.FavoriteImage
 //loads the image from the file and returns a list of favorite images
 
 fun loadFavoriteImagesFromLocal(context: Context): List<FavoriteImage> {
-    val filesDir = context.filesDir
+    val filesDir = context.filesDir ?: return emptyList()
     val imageFiles = filesDir.listFiles { file ->
         file.extension == "jpg"
     } ?: return emptyList()

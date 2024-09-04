@@ -67,7 +67,7 @@ fun FavoritesScreen() {
                     FavoriteImageCard(
                         favorite = favorite,
                         onRemoveClick = {
-                            favoritesViewModel.removeFromFavorites(context, favorite)
+                            favoritesViewModel.removeFromFavorites(favorite)
                         },
                         onSetWallpaperClick = {
                             setWallpaper(context, favorite.localPath)
