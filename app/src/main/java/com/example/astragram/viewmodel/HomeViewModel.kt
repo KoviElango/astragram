@@ -42,7 +42,7 @@ class HomeViewModel : ViewModel() {
                                     url = url,
                                     title = title,
                                     description = description,
-                                    isFavorite = false // Default favorite state; to be updated separately
+                                    isFavorite = false
                                 )
                             } else {
                                 null

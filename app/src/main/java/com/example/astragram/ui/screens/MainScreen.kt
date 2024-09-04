@@ -19,11 +19,21 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.astragram.R
 import com.example.astragram.ui.screens.favourites.FavoritesScreen
 import com.example.astragram.ui.screens.home.HomeScreen
 import com.example.astragram.viewmodel.HomeViewModel
+
+val NasalizationFontFamily = FontFamily(
+    Font(R.font.nasalization_rg, FontWeight.Normal)
+)
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
@@ -45,7 +55,15 @@ fun MainScreen(mainViewModel: HomeViewModel = viewModel()) {
         modifier = Modifier.background(Color.Black),
         topBar = {
             TopAppBar(
-                title = { Text("NASA Images", color = Color.White) },
+                title = {
+                    Text("ASTRAgram",
+                    color = Color.White,
+                    style = TextStyle(
+                        fontFamily = NasalizationFontFamily,
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 20.sp)
+                    )
+                        },
                 modifier = Modifier.windowInsetsPadding(WindowInsets.statusBars),
                 colors = TopAppBarDefaults.smallTopAppBarColors(
                     containerColor = Color.Black,

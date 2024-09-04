@@ -29,7 +29,7 @@ fun ExpandableText(displayData: String) {
 
         Text(
             text = if (isExpanded.value) "Show less" else "Show more",
-            style = MaterialTheme.typography.bodySmall.copy(color = Color.Yellow),
+            style = MaterialTheme.typography.bodySmall.copy(color = Color.Cyan),
             modifier = Modifier
                 .clickable { isExpanded.value = !isExpanded.value }
                 .padding(top = 4.dp)
