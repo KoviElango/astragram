@@ -3,8 +3,10 @@ package com.example.astragram.ui.screens.home
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -22,7 +24,11 @@ import com.example.astragram.ui.theme.BackgroundWrapper
 fun HomeScreen(
     images: List<DisplayData>,
     errorMessage: String?,
-    favoriteStateMap: MutableMap<String, Boolean>
+    favoriteStateMap: MutableMap<String, Boolean>,
+
+    onLoadMore: () -> Unit,
+    isLoading: Boolean,
+
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -54,6 +60,18 @@ fun HomeScreen(
                                 displayData
                         }
                     )
+                }
+                /**
+                 * Although loading indicator is called and modified here, variables isLoading and onLoadMore are passed from the main screen.
+                 * Any modifications to the states and behaviour should be managed at MainScreen.kt
+                 */
+                item{
+                    if (isLoading) {
+                        LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                    }
+                    LaunchedEffect(Unit) {
+                        onLoadMore()
+                    }
                 }
             }
         }

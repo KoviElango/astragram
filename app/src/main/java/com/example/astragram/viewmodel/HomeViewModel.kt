@@ -16,16 +16,22 @@ class HomeViewModel : ViewModel() {
     val imagesLiveData = MutableLiveData<List<DisplayData>>() // Holds the list of image URLs, titles, descriptions
     val errorMessage = MutableLiveData<String>() // Only for error messages
 
+    // Current page and loading state variables are used for pagination
+    private var currentPage = 1
+    var isLoading = MutableLiveData<Boolean>(false)
+
     // Function to fetch images from NASA API
-    fun fetchImages(query: String = "nebula") {
+    fun fetchImages(query: String = "nebula", page: Int = currentPage) {
+        isLoading.value = true
         viewModelScope.launch {
-            val call = RetrofitInstance.api.searchImages(query)
+            val call = RetrofitInstance.api.searchImages(query, page = page)
 
             call.enqueue(object : Callback<NasaImageResponse> {
                 override fun onResponse(
                     call: Call<NasaImageResponse>,
                     response: Response<NasaImageResponse>
                 ) {
+                    isLoading.value = false
                     if (response.isSuccessful) {
                         val items = response.body()?.collection?.items ?: emptyList()
 
@@ -48,8 +54,8 @@ class HomeViewModel : ViewModel() {
                                 null
                             }
                         }
-
-                        imagesLiveData.value = imageList
+                        val currentList = imagesLiveData.value ?: emptyList()
+                        imagesLiveData.value = currentList + imageList
                     } else {
                         errorMessage.value = "Error: ${response.message()}"
                     }
@@ -60,5 +66,10 @@ class HomeViewModel : ViewModel() {
                 }
             })
         }
+    }
+    fun loadMoreImages() {
+        if (isLoading.value == true) return
+        currentPage++
+        fetchImages(page = currentPage)
     }
 }

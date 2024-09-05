@@ -44,6 +44,7 @@ fun MainScreen(mainViewModel: HomeViewModel = viewModel()) {
     val favoriteStateMap = remember { mutableStateMapOf<String, Boolean>() }
 
     var selectedScreen by remember { mutableStateOf("Home") }
+    val isLoading by mainViewModel.isLoading.observeAsState(false)
 
     LaunchedEffect(Unit) {
         mainViewModel.fetchImages()
@@ -155,7 +156,9 @@ fun MainScreen(mainViewModel: HomeViewModel = viewModel()) {
                         "Home" -> HomeScreen(
                             images = images,
                             errorMessage = errorMessage,
-                            favoriteStateMap = favoriteStateMap
+                            favoriteStateMap = favoriteStateMap,
+                            onLoadMore = { mainViewModel.loadMoreImages() },
+                            isLoading = isLoading,
                         )
                         "Favourites" -> FavoritesScreen()
                     }
