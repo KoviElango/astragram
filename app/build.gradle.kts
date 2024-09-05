@@ -65,11 +65,10 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.runtime.livedata)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
+    implementation(libs.androidx.tracing.perfetto.handshake)
+    implementation(libs.firebase.inappmessaging)
+
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     // Retrofit and Gson for networking
@@ -92,6 +91,9 @@ dependencies {
     testImplementation (libs.mockito.kotlin)
     testImplementation (libs.junit)
     testImplementation (libs.kotlin.test)
+    //Platform
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
     androidTestImplementation (libs.androidx.core)
     androidTestImplementation (libs.androidx.junit.v113)
     androidTestImplementation (libs.androidx.espresso.core.v340)

@@ -12,6 +12,6 @@ interface NasaApiService {
         @Query("q") query: String,
         @Query("media_type") mediaType: String = "image",
         @Query("page") page: Int = 1,
-        @Query("page_size") pageSize: Int = 200
+        @Query("page_size") pageSize: Int = 10
     ): Call<NasaImageResponse>
 }
