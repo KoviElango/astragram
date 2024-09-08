@@ -12,7 +12,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.example.astragram.R
 
-//for the backgroung image; can be changed as required; just replace the background.jpg in the drawable folder with your own image
+//for the backgroung image; can be changed as required; just replace the background.jpg in the drawable folder with your own image.
 
 @Composable
 fun BackgroundWrapper(content: @Composable () -> Unit) {
