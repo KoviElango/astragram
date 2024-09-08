@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.androidx.tracing.perfetto.handshake)
     implementation(libs.firebase.inappmessaging)
+    implementation (libs.androidx.material3.v110)
 
 
     debugImplementation(libs.androidx.ui.tooling)

@@ -1,5 +1,7 @@
 package com.example.astragram.viewmodel
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,11 +22,23 @@ class HomeViewModel : ViewModel() {
     private var currentPage = 1
     var isLoading = MutableLiveData<Boolean>(false)
 
+    //search category
+    private val _searchQuery = mutableStateOf("nebula")
+    val searchQuery: State<String> = _searchQuery
+
+    // Function to update the search query
+    fun updateSearchQuery(newQuery: String) {
+        _searchQuery.value = newQuery
+        currentPage = 1
+        imagesLiveData.value = emptyList()
+        fetchImages()
+    }
+
     // Function to fetch images from NASA API
-    fun fetchImages(query: String = "nebula", page: Int = currentPage) {
+    fun fetchImages(page: Int = currentPage) {
         isLoading.value = true
         viewModelScope.launch {
-            val call = RetrofitInstance.api.searchImages(query, page = page)
+            val call = RetrofitInstance.api.searchImages(searchQuery.value, page = page)
 
             call.enqueue(object : Callback<NasaImageResponse> {
                 override fun onResponse(

@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Public
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -27,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.astragram.R
+import com.example.astragram.ui.screens.category.CategoryScreen
 import com.example.astragram.ui.screens.favourites.FavoritesScreen
 import com.example.astragram.ui.screens.home.HomeScreen
 import com.example.astragram.viewmodel.HomeViewModel
@@ -43,7 +45,7 @@ fun MainScreen(mainViewModel: HomeViewModel = viewModel()) {
     val errorMessage by mainViewModel.errorMessage.observeAsState()
     val favoriteStateMap = remember { mutableStateMapOf<String, Boolean>() }
 
-    var selectedScreen by remember { mutableStateOf("Home") }
+    var selectedScreen by remember { mutableStateOf("Category") }
     val isLoading by mainViewModel.isLoading.observeAsState(false)
 
     LaunchedEffect(Unit) {
@@ -84,6 +86,20 @@ fun MainScreen(mainViewModel: HomeViewModel = viewModel()) {
                         containerColor = Color.Black,
                         contentColor = Color.White
                     ) {
+                        NavigationBarItem(
+                            icon = {
+                                Icon(
+                                    Icons.Default.Search,
+                                    contentDescription = "Category",
+                                    tint = if (selectedScreen == "Category") color1 else color2,
+                                    modifier = Modifier.size(if (selectedScreen == "Category") 30.dp else 20.dp))
+                            },
+                            selected = selectedScreen == "Category",
+                            onClick = { selectedScreen = "Category" },
+                            colors = NavigationBarItemDefaults.colors(
+                                indicatorColor = Color.Transparent
+                            )
+                        )
                         NavigationBarItem(
                             icon = {
                                 Icon(
@@ -133,7 +149,7 @@ fun MainScreen(mainViewModel: HomeViewModel = viewModel()) {
                 AnimatedContent(
                     targetState = selectedScreen,
                     transitionSpec = {
-                        if (targetState == "Home") {
+                        if (targetState == "Category") {
                             slideInHorizontally(
                                 animationSpec = tween(durationMillis = 500),
                                 initialOffsetX = { fullWidth -> -fullWidth }) + fadeIn() with
@@ -153,6 +169,9 @@ fun MainScreen(mainViewModel: HomeViewModel = viewModel()) {
                     }
                 ) { targetScreen ->
                     when (targetScreen) {
+                        "Category" -> CategoryScreen(
+                            viewModel = mainViewModel,
+                            onCategorySelected = { selectedScreen = "Home" })
                         "Home" -> HomeScreen(
                             images = images,
                             errorMessage = errorMessage,
