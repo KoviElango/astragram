@@ -26,7 +26,7 @@ import com.example.astragram.viewmodel.HomeViewModel
 @Composable
 fun CategoryScreen(viewModel: HomeViewModel = viewModel(), onCategorySelected: () -> Unit) {
 
-    val searchItems = listOf("nebula", "stars", "galaxy", "planet", "moon", "aliens")
+    val searchItems = listOf("nebula", "stars", "galaxy", "planet", "moon", "earth", "aliens")
     var selectedItem by remember { mutableStateOf(searchItems[0]) }
     BackgroundWrapper {
 
@@ -54,13 +54,14 @@ fun CategoryScreen(viewModel: HomeViewModel = viewModel(), onCategorySelected: (
                     onCategorySelected()
                 },
                 modifier = Modifier
-                    .padding(6.dp)
+                    .padding(8.dp)
                     .width(200.dp)
                     .height(50.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = if (item == "aliens") Color(0f, 0.6f, 0f, 0.3f) else Color(0f, 0f, 0f, 0.5f)
+                    containerColor = if (item == "aliens") Color(0f, 0.6f, 0f, 0.3f) else if (item == "earth") Color(0.5f, 0.8f, 1f, 0.3f) else Color(0.1f, 0.1f, 0.1f, 0.3f)
                 ),
-                shape = RoundedCornerShape(15.dp)
+                border = ButtonDefaults.outlinedButtonBorder,
+                shape = RoundedCornerShape(17.dp)
             ) {
                 Text(text = item)
             }
