@@ -36,22 +36,6 @@ fun addFavorite(context: Context, favoriteImage: FavoriteImage) {
     editor.apply()
 }
 
-
-/**
- removeFavorite Function: Deletes a favorite image file from the local storage.
- How it works:
- * Takes the path of the image (imagePath) and creates a File object.
- * Checks if the file exists using file.exists() and deletes it with file.delete() if it does.
-*/
-
-
-fun removeFavorite(context: Context, imagePath: String) {
-    val file = File(imagePath)
-    if (file.exists()) {
-        file.delete()
-    }
-}
-
 /**
  getFavorites Function: Retrieves the list of favorite images stored in SharedPreferences.
  How it works:

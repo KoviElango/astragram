@@ -31,6 +31,8 @@ suspend fun initiateImageDownload(context: Context, displayData: DisplayData) {v
 }
 
 //This function handles the actual downloading of the image from the URL and saves it to the local file system.
+//Returns localPath or null if an error occurs.
+
 suspend fun downloadImageAsync(context: Context, imageUrl: String, imageTitle: String): String? {
     return withContext(Dispatchers.IO) {
         try {

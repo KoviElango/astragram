@@ -32,7 +32,13 @@ class FavoritesViewModel : ViewModel() {
         }
     }
 
-    // Function to remove a favorite image
+    /**
+    removeFavorite Function: Deletes a favorite image file from the local storage.
+    How it works:
+     * Takes the path of the image (imagePath) and creates a File object.
+     * Checks if the file exists using file.exists() and deletes it with file.delete() if it does.
+     */
+
     fun removeFromFavorites(favoriteImage: FavoriteImage) {
         val currentFavorites = _favoritesLiveData.value.orEmpty().toMutableList()
         currentFavorites.remove(favoriteImage)
