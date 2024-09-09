@@ -23,6 +23,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.astragram.ui.theme.BackgroundWrapper
 import com.example.astragram.viewmodel.HomeViewModel
 
+/**
+ * This is the Category screen; contains a lazy list of buttons which is not the landing screen, users get to choose a category to search for images.
+ * the default category would be nebula.
+ * Category parameter is sent to viewmodel and stored in variable: _searchQuery
+ */
+
 @Composable
 fun CategoryScreen(viewModel: HomeViewModel = viewModel(), onCategorySelected: () -> Unit) {
 
